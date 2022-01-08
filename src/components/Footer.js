@@ -31,21 +31,21 @@ const Wrapper = styled.footer`
   h5 {
     color: var(--clr-white);
     margin: 0.1rem;
-
     font-weight: 400;
     text-transform: none;
     line-height: 1.25;
   }
   .paymentsImg {
     margin-top: 5px;
-    margin-left: 0px;
+    margin-left: 30px;
   }
 
-  @media (min-width: 776px) {
+  @media (min-width: 576px) {
     flex-direction: row;
   }
+
   .paymentsImg {
-    margin-left: 40px;
+    padding-left: 0px;
   }
 `;
 
