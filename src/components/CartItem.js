@@ -2,9 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { formatPrice } from '../utils/helpers';
 import AmountButtons from './AmountButtons';
-import { FaTrash } from 'react-icons/fa';
+import { FaTrash, FaSearch } from 'react-icons/fa';
 import { useCartContext } from '../context/cart_context';
+import { Link } from 'react-router-dom';
+
 const CartItem = ({ id, image, name, color, price, amount }) => {
+  const idWithoutColor = id.slice(0, -7);
   const { removeItem, toggleAmount } = useCartContext();
   const increase = () => {
     toggleAmount(id, 'inc');
@@ -16,7 +19,12 @@ const CartItem = ({ id, image, name, color, price, amount }) => {
   return (
     <Wrapper>
       <div className="title">
-        <img src={image} alt={name} />
+        <div className="container">
+          <img src={image} alt={name} />
+          <Link to={`/products/${idWithoutColor}`} className="link">
+            <FaSearch />
+          </Link>
+        </div>
         <div>
           <h5 className="name">{name}</h5>
           <p className="color">
@@ -65,6 +73,7 @@ const Wrapper = styled.article`
     width: 100%;
     height: 100%;
     display: block;
+    transition: var(--transition);
     border-radius: var(--radius);
     object-fit: cover;
   }
@@ -172,6 +181,38 @@ const Wrapper = styled.article`
         font-size: 1.5rem;
       }
     }
+  }
+  .container {
+    position: relative;
+    height: 5.5rem;
+    background: var(--clr-black);
+    border-radius: var(--radius);
+  }
+  .link {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--clr-primary-5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    transition: var(--transition);
+    opacity: 0;
+    cursor: pointer;
+    svg {
+      font-size: 1.25rem;
+      color: var(--clr-white);
+    }
+  }
+  .container:hover img {
+    opacity: 0.5;
+  }
+  .container:hover .link {
+    opacity: 1;
   }
 `;
 
